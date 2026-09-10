@@ -41,7 +41,7 @@ for column in columns: #por columna o atributo
             inferior = temp[k]["inferior"]
             superior = temp[k]["superior"]
             if val >= inferior and val<superior:
-                X.loc[j, column] = "var" + str(k+1)
+                X.loc[j, column] = "P08_NaiveBayes" + str(k+1)
          #
     #print()
 #############################################################################################
