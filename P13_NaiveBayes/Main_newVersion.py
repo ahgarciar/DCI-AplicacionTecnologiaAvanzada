@@ -1,13 +1,13 @@
 from sklearn.model_selection import train_test_split
-from P05_KNN_Modularizado import CargaInstancia
+import pandas as pd
 
-dataset = CargaInstancia.cargarInstancia("../Archivos/iris/instancia_discretizada_EWB.csv")
+dataset = pd.read_csv("../iris/iris_discretizada_EWB.csv")
 
 X = dataset.iloc[:, :-1].copy()
 y = dataset.iloc[:, -1].copy()
 
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.30, random_state=7, stratify=y #APLICA ESTRATIFICACION
+    X, y, test_size=0.20, random_state=7, stratify=y #APLICA ESTRATIFICACION
 )
 #############################################################################################
 ##count registers per class

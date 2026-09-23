@@ -1,8 +1,8 @@
-from P05_KNN_Modularizado import CargaInstancia
+import pandas as pd
 
-#instancia = CargaInstancia.cargarInstancia("../Archivos/InstanciaTennis.csv")
-instancia = CargaInstancia.cargarInstancia("../Archivos/InstanciaLeon.csv")
+instancia = pd.read_csv("../P13_NaiveBayes/InstanciaLeon.csv")
 #instancia = instancia.drop("Day", axis=1)
+
 ##count registers per class
 #############################################################################################
 probabilities = []
