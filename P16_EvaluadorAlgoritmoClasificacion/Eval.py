@@ -23,8 +23,12 @@ from sklearn.metrics import (
 
 # 1. DATOS REALES Y PREDICCIONES
 # Ejemplo con tres clases
-y_test = [0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2]
-y_pred = [0, 1, 1, 0, 2, 2, 0, 1, 2, 1, 1, 2]
+y_test = [0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2] #real
+y_pred = [0, 1, 1, 0, 2, 2, 0, 1, 2, 1, 1, 2] #predicha por el algoritmo
+
+y_pred1 = [0, 1, 1, 0, 2, 2, 0, 1, 2, 1, 1, 2] #predicha por el algoritmo
+y_pred2 = [0, 1, 1, 0, 2, 2, 0, 1, 2, 1, 1, 2] #predicha por el algoritmo
+y_pred3 = [0, 1, 1, 0, 2, 2, 0, 1, 2, 1, 1, 2] #predicha por el algoritmo
 
 clases = np.unique(np.concatenate([y_test, y_pred]))
 
