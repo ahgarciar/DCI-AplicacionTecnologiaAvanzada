@@ -14,9 +14,11 @@ y = pd.DataFrame(instancia.iloc[:,-1])
 X_train, X_temp, y_train, y_temp = train_test_split(X, y, test_size=0.30, random_state=7) #70/30
 X_val, X_test, y_val, y_test   = train_test_split(X_temp, y_temp, test_size=0.50, random_state=7) #15/15
 
+#calcula el promedio y la desviacion estandar
 x_scaler = StandardScaler().fit(X_train)
 y_scaler = StandardScaler().fit(y_train)   # facilita el calculo de la funcion de perdida (loss)
 
+#con los valores calculados aplica la estandarizacion en todos los conjuntos
 X_train_s = x_scaler.transform(X_train)
 X_val_s   = x_scaler.transform(X_val)
 X_test_s  = x_scaler.transform(X_test)
@@ -24,19 +26,24 @@ y_train_s = y_scaler.transform(y_train)
 y_val_s   = y_scaler.transform(y_val)
 y_test_s  = y_scaler.transform(y_test)
 
+##la red neuronal
 def create_model():
     model = Sequential([
+        #capa de entrada
         layers.Input(shape=(2,)), #entrada -> x1, x2
 
+        #capa oculta 1
+        layers.Dense(64, activation="relu"),
+        layers.Dropout(0.1), #desactiva el "10%" de la neuronas
+
+        #capa oculta 2
         layers.Dense(128, activation="relu"),
         layers.Dropout(0.1),
 
-        layers.Dense(128, activation="relu"),
-        layers.Dropout(0.1),
-
+        #capa de salida
         layers.Dense(1, activation="linear") #salida -> y
     ])
-    opt = optimizers.Adam(learning_rate=1e-3)
+    opt = optimizers.Adam(learning_rate=.003) #1e-3) #.1 .01 .001
     model.compile(optimizer=opt, loss="mse", metrics=["mae"])
     return model
 
