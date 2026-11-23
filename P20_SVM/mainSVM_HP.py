@@ -8,7 +8,7 @@ from sklearn.svm import SVC
 from joblib import dump
 
 # "random", "grid" o "heuristica"
-metodo_busqueda = "random"
+metodo_busqueda = "heuristica"
 
 #
 #SE REQUIERE:
@@ -50,7 +50,7 @@ params_grid = [
     # Kernel lineal
     {
         "kernel": ["linear"],
-        "C": [0.01, 0.1, 1, 10, 100]
+        "C": [0.01, 0.1, 1, 10, 100] # -> C [ 0.01 - 100 ]
     },
     # Kernel RBF (gaussiano)
     {
@@ -71,9 +71,9 @@ params_grid = [
 # AJUSTE DE HIPERPARÁMETROS CON TRAIN Y VAL
 def evaluar_parametros(params):
     modelo = SVC(**params, random_state=7) # SVC(kernel="rbf", C=1, gamma="scale", random_state=7)
-    modelo.fit(X_train_s, y_train)
-    predicciones = modelo.predict(X_val_s)
-    return accuracy_score(y_val, predicciones)
+    modelo.fit(X_train_s, y_train) #entrenamiento del modelo
+    predicciones = modelo.predict(X_val_s) # prueba del modelo
+    return accuracy_score(y_val, predicciones) #calcular la metrica de precision
 
 
 if metodo_busqueda == "random":
@@ -92,11 +92,11 @@ elif metodo_busqueda == "grid":
 
 elif metodo_busqueda == "heuristica":
     # Heurística básica con un RBF de base
-    mejores_params = {"kernel": "rbf", "C": 1, "gamma": "scale"}
+    mejores_params = {"kernel": "rbf", "C": 1, "gamma": "scale"} #solucion inicial de referencia
     mejor_acc = evaluar_parametros(mejores_params)
 
     # Primero ajusta C y después gamma. Solo acepta mejoras
-    for parametro in ("C", "gamma"):
+    for parametro in ("C", "gamma"): #busqueda local con best improvement
         for valor in params_grid[1][parametro]:
             if valor == mejores_params[parametro]:
                 continue
