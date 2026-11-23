@@ -47,7 +47,7 @@ def poly_kernel(X, degree=3, gamma=1.0, coef0=1.0):
 if __name__ == "__main__":
     rng = np.random.default_rng(5)
     n = 10
-    datos_por_clase = int(n/2)
+    datos_por_clase = int(n/2) #para asegurar el balanceo
     #puntos de la clase 0
     X0 = rng.normal(loc=[-5, -5], scale=1.0, size=(datos_por_clase, 2))
     #puntos de la clase 1

@@ -10,7 +10,7 @@ def entrenar_y_graficar(X, y, kernel, C=1.0, gamma="scale", degree=3):
 
     #CREA Y ENTRENA EL MODELO
     modelo = SVC(kernel=kernel, C=C, gamma=gamma, degree=degree)
-    modelo.fit(X_escalada, y)
+    modelo.fit(X_escalada, y) #entrenar el modelo con los hiperparametros que definimos
 
     #FRONTERA DE DECISION DEL MODELO SVM (Permite visualizar lo que el modelo aprendio
     #RANGO DEL PLANO (EXTREMOS CON MARGEN (DE 0.5)
@@ -57,7 +57,9 @@ if __name__ == "__main__":
     X1 = rnd.normal(loc=[ 5,  5], scale=1.0, size=(datos_por_clase, 2)) #datos en el cuadrante I
     X2 = rnd.normal(loc=[-3, -2], scale=1.0, size=(datos_por_clase, 2))  # datos en el cuadrante III
     X3 = rnd.normal(loc=[3, -4], scale=1.0, size=(datos_por_clase, 2))  # datos en el cuadrante IV
+
     X = np.vstack([X0, X1, X2, X3]) #atributos de la instancia
+
     y = np.array([0]*datos_por_clase + [1]*datos_por_clase + [2]*datos_por_clase + [3]*datos_por_clase) # clase ordinalizada para cada registro
 
     #datos iniciales

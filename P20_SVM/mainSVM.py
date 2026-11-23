@@ -31,7 +31,7 @@ X_val, X_test, y_val, y_test = train_test_split(
 )
 
 # ESCALADO (con TRAIN)
-x_scaler = StandardScaler().fit(X_train)
+x_scaler = StandardScaler().fit(X_train) #calculo del los valores para estandarizar
 X_train_s = x_scaler.transform(X_train)
 X_val_s   = x_scaler.transform(X_val)
 X_test_s  = x_scaler.transform(X_test)
@@ -60,6 +60,7 @@ params_grid = [
     }
 ]
 
+#La configuracion del modelo
 params= params_grid[1] #rbf
 # - probability=True para obtener predict_probabilities
 svm_model = SVC(
@@ -81,7 +82,14 @@ print(f"\nValidación - Accuracy: {val_acc:.4f}")
 X_trainval = np.vstack([X_train_s, X_val_s])
 y_trainval = np.concatenate([y_train, y_val])
 
-svm_final = SVC(kernel=params["kernel"][0], C=params["C"][1], gamma=params["gamma"][0], probability=True, random_state=7)
+svm_final = (
+    SVC(
+        kernel=params["kernel"][0],
+        C=params["C"][1],
+        gamma=params["gamma"][0],
+        probability=True,
+        random_state=7)
+    )
 svm_final.fit(X_trainval, y_trainval)
 
 # EVALUACIÓN FINAL EN TEST
@@ -98,6 +106,7 @@ cm_df = pd.DataFrame(cm, index=encoder.classes_, columns=encoder.classes_)
 print("\nConfusion Matrix (rows=true, cols=pred):")
 print(cm_df)
 
+#Guarda el modelo
 dump(svm_final, "svm_model.joblib")
 dump(x_scaler,  "x_scaler.joblib")
 dump(encoder,   "label_encoder.joblib")

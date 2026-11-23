@@ -2,7 +2,8 @@ import pandas as pd
 #from ydata_profiling import ProfileReport
 from data_profiling import ProfileReport  # pip install fg-data-profiling
 
-df = pd.read_csv("../iris/iris.csv")
+#df = pd.read_csv("../iris/iris.csv")
+df = pd.read_csv("../iris/abalone.csv")
 
 reporte = ProfileReport(
     df,
@@ -14,5 +15,5 @@ reporte = ProfileReport(
 #reporte.to_notebook_iframe()
 
 #Para HTML
-reporte.to_file("reporte_explorative.html")
+reporte.to_file("reporte_explorative_abalone.html")
 
